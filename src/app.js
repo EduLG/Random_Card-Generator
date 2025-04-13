@@ -1,12 +1,10 @@
-import "bootstrap";
-import "./style.css";
-import "./assets/img/rigo-baby.jpg";
-import "./assets/img/4geeks.ico";
-
 document.addEventListener('DOMContentLoaded', () => {
 
   const suit = [ "&spades;", "&hearts;", "&diams;", "&clubs;"];
   const value = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+  const upperSymbol = document.getElementById('upper-symbol')
+  const lowerSymbol = document.getElementById('lower-symbol')
+  const cardValue = document.getElementById('card-value')
 
   function randomGenerator() {
 
@@ -14,16 +12,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const randomValue = value[Math.floor(Math.random() * value.length)];
     
     return {
-      suitRd: randomSuit,
-      valueRd: randomValue
+      rdSuit: randomSuit,
+      rdValue: randomValue
     }
 
   }
 
-  const card = randomGenerator();
+  function turnIconRed(element) {
+    element.style.color = "red";
+    console.log(element)
+  }
 
-  document.getElementById('upper-symbol').innerHTML = card.suitRd;
-  document.getElementById('lower-symbol').innerHTML = card.suitRd;
-  document.getElementById('card-value').innerHTML = card.valueRd;
+  const card = randomGenerator();
+  console.log(card);
+
+  if(card.rdSuit === suit[1] || card.rdSuit === suit[2]){
+    console.log("before")
+    turnIconRed(upperSymbol)
+    turnIconRed(lowerSymbol)
+    console.log("after")
+  }
+
+  upperSymbol.innerHTML = card.rdSuit;
+  lowerSymbol.innerHTML = card.rdSuit;
+  cardValue.innerHTML = card.rdValue;
 
 });
